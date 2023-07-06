@@ -4,7 +4,7 @@ const readline = require('readline');
 class Wordworm {
     constructor() {
         // Array to store all the words given by the player, initial word is 'Anfang'
-        this.words = ['Anfang'];
+        this.words = ['Anfang'.toLowerCase()];
         // Player name
         this.player = 'Player 1';
         // Variable to count the number of consecutive empty inputs
@@ -14,6 +14,8 @@ class Wordworm {
             input: process.stdin,
             output: process.stdout
         });
+        // Print the initial word
+        console.log(`Das Startwort ist: "${this.words[0]}"`);
     }
     
     // Function to return the last letter of a word
@@ -23,6 +25,8 @@ class Wordworm {
     
     // Function to check if the given word is valid
     checkWord = (word) => {
+        // Convert to lowercase
+        word = word.toLowerCase();
         // Get the last word from the words list
         const lastWord = this.words[this.words.length - 1];
         // Check if the new word starts with the last letter of the last word
@@ -53,6 +57,7 @@ class Wordworm {
         } else {
             // If input is not empty, reset the counter and check if the word is valid
             this.emptyInputCount = 0;
+            word = word.toLowerCase();
             if (this.checkWord(word)) {
                 this.words.push(word);
                 console.log("Bravo! Das war richtig!");
