@@ -1,8 +1,8 @@
 {
   "name": "wordsworm",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A simple web game with words and letters.",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
