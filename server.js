@@ -3,7 +3,7 @@
 // Name of this file: wordsworm.js
 
 // Importiert das Express-Modul für Webanwendungen.
-const express = require('express');
+import express from 'express';
 // Initialisiert eine Express-App.
 const app = express();
 // Definiert den Port, auf dem der Server lauschen wird.
@@ -18,7 +18,7 @@ app.use(express.static('public'));
 app.get('/', (req, res) => {
     console.log('User called website without path, We deliver index.html');
     // sendFile liefert die angegebene Datei an den Client. __dirname ist das Verzeichnis, in dem das aktuelle Skript liegt.
-    res.sendFile(__dirname + '/public/index.html');
+    res.sendFile(`${__dirname}/public/index.html`);
 });
 
 // Pfad und Datei zum Senden für einen bestimmten Anforderungspfad definieren.
@@ -28,7 +28,7 @@ let fileToDeliver = "index.html";
 app.get(calledPath, (req, res) => {
     console.log(`User called Website with path ${calledPath}. We deliver ${fileToDeliver}`);
     // Sendet die angegebene Datei für Anfragen an 'calledPath'.
-    res.sendFile(__dirname + '/public/' + fileToDeliver);
+    res.sendFile(`${__dirname}/public/${fileToDeliver}`);
 });
 
 // Startet den Server und lässt ihn auf dem definierten Port lauschen.
