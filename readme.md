@@ -79,6 +79,11 @@ If you encounter any issues or have any feedback, please [open an issue](https:/
 Wörterwurm für Konsole wurde in JavaScript ES6 geschrieben und nutzt die eingebaute 'readline'-Bibliothek von Node.js, um Eingaben von der Konsole einzulesen.
 
 
+## Weitere Dokumente
+
+Für eine detaillierte Erklärung der `package.json`-Datei, sehen Sie bitte die [Package-Dokumentation](./PACKAGE.md).
+
+
 ## Zukunftsausblick
 
 Insgesamt ist "Wörterwurm" ein einfaches, aber unterhaltsames Spiel, das die Wortkenntnisse der Spieler herausfordert und erweitert. Es hat das Potenzial für weitere Verbesserungen und Erweiterungen, wie zum Beispiel die Hinzufügung von mehreren Spielern, Zeiteinschränkungen oder speziellen Punkteregeln.
