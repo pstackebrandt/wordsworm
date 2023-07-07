@@ -1,5 +1,7 @@
 'use strict'; // Aktivieren Sie den strengen Modus
 
+// Name of this file: wordsworm.js
+
 // Definiere Spielklasse
 class WordwormGame {
     constructor() {
