@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "client": "public/index.html"
+    "client": "start http://localhost:3000",
+    "console-game": "node console_game/index_console_game.js"
   },
   "repository": {
     "type": "git",
