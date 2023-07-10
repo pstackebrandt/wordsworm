@@ -27,12 +27,15 @@ class WordwormGame {
 
     // Add function sendMatchResultToServer()
     sendMatchResultToServer = () => {
+        console.log('sendMatchResultToServer() called');
         const url = 'http://127.0.0.1:3000/saveMatchResult';
         const data = {
             team: 'Team 1',
             words: game.getWords(),
             score: game.getWords().length - 1
         };
+
+        console.log('sendMatchResultToServer() sends data:', JSON.stringify(data));
 
         fetch(url, {
             method: 'POST',

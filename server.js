@@ -24,18 +24,8 @@ const port = 3000;
 // Alles in 'public' wird direkt zugänglich sein.
 app.use(express.static('public'));
 
-// Aktiviert CORS nur für lokale Routen.
-app.use(cors({
-    // Erlaubt Anfragen nur von diesen Quelle
-    origin: function (origin, callback) {
-        console.log('CORS origin:', origin);
-         if (['http://127.0.0.1:3000', 'http://localhost:3000'].indexOf(origin) !== -1) {
-            callback(null, true)
-         } else {
-             callback(new Error('Nicht erlaubt durch CORS'))
-        }
-    }
-}));
+// Aktiviert CORS für alle Routen.
+app.use(cors());
 
 app.use(express.json()); // for parsing application/json
 
@@ -46,10 +36,20 @@ app.get(calledPath, (req, res) => {
     res.sendFile(`${__dirname}/public/${fileToDeliver}`);
 });
 
-// ergänze ein post Route für saveMatchResult
+// Match-Ergebnisse speichern
 app.post('/saveMatchResult', (req, res) => {
-    console.log(`User called Server with path . We save a match result to the database`);
+    console.log('Empfangene Match-Ergebnisse:', req.body);
+
+    console.log(`req.body.team: ${req.body.team}`);
+    console.log(`req.body.words: ${req.body.words}`);
+    console.log(`req.body.score: ${req.body.score}`);
+    // Du könntest die empfangenen Daten hier auch in einer Datenbank speichern.
+    // Dies wäre der Codeplatz dafür.
+
+    // Nachdem die Daten gespeichert wurden, sende eine Antwort zurück zum Client.
+    res.json({ message: 'Match-Ergebnisse erfolgreich gespeichert.' });
 });
+
 
 // Startet den Server und lässt ihn auf dem definierten Port lauschen.
 app.listen(port, hostIP, () => {
