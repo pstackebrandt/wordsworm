@@ -16,9 +16,6 @@ const __dirname = dirname(__filename);
 const app = express();
 const port = 3000;
 
-// Middleware zur Bereitstellung von statischen Dateien.
-// Alles in 'public' wird direkt zugänglich sein.
-//app.use(express.static('public'));
 app.use(express.json()); // for parsing application/json
 
 // Definiert eine Route für die Startseite ('/').
@@ -32,6 +29,11 @@ app.get('/', (req, res) => {
     res.sendFile(`${__dirname}/public/${fileToDeliver}`);
 });
 
+// Middleware zur Bereitstellung von statischen Dateien.
+// Alles in 'public' wird direkt zugänglich sein.
+// Wenn ein direkter Abruf eines Files manuell bearbeitet werden soll,
+// muss er vor dieser Zeile stehen.
+app.use(express.static('public'));
 
 let calledPath = '/one-player';
 fileToDeliver = "index.html";

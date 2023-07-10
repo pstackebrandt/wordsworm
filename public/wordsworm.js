@@ -24,6 +24,36 @@ class WordwormGame {
     getWords() {
         return this.words;
     }
+
+    // Add function sendMatchResultToServer()
+    sendMatchResultToServer = () => {
+        const url = 'http://127.0.0.1:3000/saveMatchResult';
+        const data = {
+            team: 'Team 1',
+            words: game.getWords(),
+            score: game.getWords().length - 1
+        };
+
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Match result sent to server:', data);
+        })
+        .catch(error => {
+            console.error('Error sending match result to server:', error);
+        });
+    }
 }
 
 // Erstelle ein neues Spiel
@@ -81,4 +111,5 @@ function updateGameArea() {
 // Beende das Spiel und zeige die Punktzahl
 function endGame() {
     gameArea.innerHTML = `<p>Spiel beendet. Du hast ${game.getWords().length - 1} Punkte erreicht!</p>`;
+    game.sendMatchResultToServer();
 }
