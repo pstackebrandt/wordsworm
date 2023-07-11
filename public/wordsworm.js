@@ -80,7 +80,7 @@ class WordswormGame {
 function initializeGame(game, currentTeamNameDisplay, gameArea, teamChangeArea) {
     // Display the current team name and option to change it
     displayCurrentTeamName(game, currentTeamNameDisplay);
-    displayTeamNameChangeOption(game, teamChangeArea);
+    displayTeamNameChangeOption(game, teamChangeArea, currentTeamNameDisplay);
 
     let emptyInputs = 0;  // Zähler für leere Eingaben
     const input = document.createElement('input');
@@ -111,11 +111,8 @@ function initializeGame(game, currentTeamNameDisplay, gameArea, teamChangeArea) 
 
     // Event listener for Enter key in input field
     input.addEventListener('keyup', (event) => {
-        // Number 13 is the "Enter" key on the keyboard
-        if (event.keyCode === 13) {
-            // Cancel the default action, if needed
+        if (event.key === 'Enter') {
             event.preventDefault();
-            // Trigger the button element with a click
             submitWord();
         }
     });
@@ -129,7 +126,7 @@ function displayCurrentTeamName(game, currentTeamNameDisplay) {
     currentTeamNameDisplay.textContent = `Team: ${game.teamName}`;
 }
 
-function displayTeamNameChangeOption(game, teamChangeArea) {
+function displayTeamNameChangeOption(game, teamChangeArea, currentTeamNameDisplay) {
     // Clear the previous content
     teamChangeArea.innerHTML = '';
 
@@ -138,12 +135,22 @@ function displayTeamNameChangeOption(game, teamChangeArea) {
     const changeTeamNameButton = document.createElement('button');
     changeTeamNameButton.textContent = 'Teamnamen ändern';
 
-    changeTeamNameButton.addEventListener('click', () => {
+    const changeTeamName = () => {
         const newTeamName = teamNameInput.value;
         if (newTeamName !== '') {
             game.changeTeamName(newTeamName);
             // Update the displayed team name
             displayCurrentTeamName(game, currentTeamNameDisplay);
+        }
+    };
+
+    changeTeamNameButton.addEventListener('click', changeTeamName);
+
+    // Event listener for Enter key in input field
+    teamNameInput.addEventListener('keyup', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            changeTeamName();
         }
     });
 
