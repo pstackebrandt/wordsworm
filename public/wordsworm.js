@@ -18,7 +18,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
 // Definiere Spielklasse
 class WordswormGame {
     constructor() {
-        this.words = ["Anfang"]; // Initialisiere das Wörter-Array mit dem Startwort
+        //this.words = ["Anfang"]; // Initialisiere das Wörter-Array mit dem Startwort
+        this.words = ["Anfang", "Gans", "Sau", "Ulme", "Emil", "Lupe", "Esel", "Lust"]; // dummy values for testing
+
         this.teamName = "Elfe Hannah";  // Initialize team name
     }
 
@@ -167,22 +169,15 @@ function displayTeamNameChangeOption(game, teamChangeArea, currentTeamNameDispla
 
 // Aktualisiert den Spielbereich mit der aktuellen Liste der Worte
 const updateGameArea = (game, gameArea) => {
-    // Entfernen der alten Wortliste, wenn sie existiert
-    const oldWordList = document.querySelector("#foundWordsList").querySelector('ul');
-    if (oldWordList) {
-        oldWordList.remove();
-    }
+    const wordList = document.querySelector("#wordList");
+    wordList.innerHTML = ""; // Löscht den vorherigen Inhalt der Wortliste
 
-    // Erstellen einer neuen Wortliste aus den aktuellen Wörtern des Spiels
-    const wordList = document.createElement('ul');
     game.getWords().forEach(word => {
-        const listItem = document.createElement('li');
-        listItem.textContent = word;
-        wordList.append(listItem);
+        const wordItem = document.createElement('div');
+        wordItem.textContent = word;
+        wordItem.classList.add("word-item");
+        wordList.append(wordItem);
     });
-
-    // Hinzufügen der neuen Wortliste zur Webseite
-    document.querySelector("#foundWordsList").append(wordList);
 }
 
 // Beende das Spiel und zeige die Punktzahl
