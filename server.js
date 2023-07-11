@@ -1,4 +1,4 @@
-"use strict";  // Aktiviert den Strict-Mode für JavaScript, um sicherzustellen, dass der Code in einer "sicheren" Umgebung ausgeführt wird.
+"use strict";
 
 // Name of this file: wordsworm.js
 
@@ -9,8 +9,12 @@ import express from 'express';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
-// Importiert das CORS-Modul.
+// CORS-Modul. Erlaubt Anfragen von anderen Domains.
 import cors from 'cors';
+
+// Funktionen zum Erstellen und Speichern von Match-Ergebnissen.
+import { createMatchResult } from './matchResultUtils.js';
+import { saveMatchResultToDB } from './save-match-result-to-couch-db.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -40,14 +44,21 @@ app.get(calledPath, (req, res) => {
 app.post('/saveMatchResult', (req, res) => {
     console.log('Empfangene Match-Ergebnisse:', req.body);
 
-    console.log(`req.body.team: ${req.body.team}`);
-    console.log(`req.body.words: ${req.body.words}`);
-    console.log(`req.body.score: ${req.body.score}`);
-    // Du könntest die empfangenen Daten hier auch in einer Datenbank speichern.
-    // Dies wäre der Codeplatz dafür.
+    // Erstellen des MatchResult-Objekts mit der createMatchResult Funktion
+    let matchResult = createMatchResult(req.body);
 
-    // Nachdem die Daten gespeichert wurden, sende eine Antwort zurück zum Client.
-    res.json({ message: 'Match-Ergebnisse erfolgreich gespeichert.' });
+    // Speichern des MatchResult in der Datenbank
+    saveMatchResultToDB(matchResult)
+        .then(response => {
+            console.log('Match-Ergebnis erfolgreich in CouchDB gespeichert.', response);
+            // Senden einer Erfolgsmeldung zurück an den Client
+            res.json({ message: 'Match-Ergebnisse erfolgreich gespeichert.' });
+        })
+        .catch(err => {
+            console.error('Fehler beim Speichern des Match-Ergebnisses in CouchDB.', err);
+            // Senden einer Fehlermeldung zurück an den Client
+            res.status(500).json({ message: 'Fehler beim Speichern des Match-Ergebnisses.' });
+        });
 });
 
 
