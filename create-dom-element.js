@@ -26,12 +26,10 @@ const createDOMElement = ({
     Object.entries(listeners).forEach(el => neu.addEventListener(...el));
     Object.entries(styles).forEach(style => neu.style[style[0]] = style[1]);
 
-    if (!amEnde)  parent.prepend(neu);
+    if (!amEnde) parent.prepend(neu);
     else parent.append(neu);
 
     return neu;
 }
-
-
 
 export default createDOMElement;
