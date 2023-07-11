@@ -2,6 +2,11 @@
 
 // file: wordsworm.js
 
+// References to HTML elements
+const currentTeamNameDisplay = document.querySelector("#currentTeamNameDisplay");
+const teamChangeArea = document.querySelector("#teamChangeArea");
+
+
 // Definiere Spielklasse
 class WordwormGame {
     constructor() {
@@ -74,8 +79,9 @@ const gameArea = document.querySelector("#gameArea");
 initializeGame();
 
 function initializeGame() {
-    // Display team name and option to change it
-    displayTeamName();
+    // Display the current team name and option to change it
+    displayCurrentTeamName();
+    displayTeamNameChangeOption();
 
     let emptyInputs = 0;  // Zähler für leere Eingaben
     const input = document.createElement('input');
@@ -119,14 +125,14 @@ function initializeGame() {
     updateGameArea();
 }
 
-function displayTeamName() {
-    // Clear the previous content
-    teamNameArea.innerHTML = '';
+function displayCurrentTeamName() {
+    // Update the displayed team name
+    currentTeamNameDisplay.textContent = `Team: ${game.teamName}`;
+}
 
-    // Display the current team name
-    const teamNameDisplay = document.createElement('p');
-    teamNameDisplay.textContent = `Teamname: ${game.teamName}`;
-    teamNameArea.append(teamNameDisplay);
+function displayTeamNameChangeOption() {
+    // Clear the previous content
+    teamChangeArea.innerHTML = '';
 
     // Add input and button to change team name
     const teamNameInput = document.createElement('input');
@@ -138,11 +144,11 @@ function displayTeamName() {
         if (newTeamName !== '') {
             game.changeTeamName(newTeamName);
             // Update the displayed team name
-            displayTeamName();
+            displayCurrentTeamName();
         }
     });
 
-    teamNameArea.append(teamNameInput, changeTeamNameButton);
+    teamChangeArea.append(teamNameInput, changeTeamNameButton);
 }
 
 // Aktualisiere die Spielanzeige
