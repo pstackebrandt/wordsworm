@@ -92,6 +92,13 @@ const initializeGame = (game, currentTeamNameDisplay, gameArea, teamChangeArea) 
     const button = document.createElement('button');
     button.textContent = 'Wort hinzufügen';
 
+    // Create a container
+    const container = document.createElement('div');
+    container.classList.add('input-button-container');
+
+    // Add input and button to the container
+    container.append(input, button);
+
     // Funktion zur Behandlung der Wortübermittlung
     const submitWord = () => {
         const word = input.value;
@@ -125,7 +132,7 @@ const initializeGame = (game, currentTeamNameDisplay, gameArea, teamChangeArea) 
     });
 
     // Hinzufügen der Eingabe und der Schaltfläche zur Eingabebereich der Webseite
-    document.querySelector("#wordInputArea").append(input, button);
+    document.querySelector("#wordInputArea").append(container);
 
     // Aktualisieren der Wortliste beim Initialisieren
     updateGameArea(game, gameArea);
