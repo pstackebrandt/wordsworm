@@ -2,9 +2,7 @@
 
 .word-list {
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
-    height: 400px; /* Höhe anpassen, um vier Wörter pro "Spalte" zu ermöglichen */
     gap: 8px;
 }
 
@@ -13,9 +11,6 @@
     background-color: #f8f9fa;
     border: 1px solid #ced4da;
     border-radius: 4px;
-    max-width: 100px; /* Breite der Wortelemente begrenzen */
 }
 
-.word-item:nth-child(4n+1), .word-item:nth-child(4n+2) {
-    transform: translateX(50%); /* verschiebt jedes erste und zweite Wort einer "Spalte" um 50% seiner Breite nach rechts */
-}
+
