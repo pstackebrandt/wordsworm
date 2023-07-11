@@ -2,10 +2,18 @@
 
 // file: wordsworm.js
 
-// References to HTML elements
-const currentTeamNameDisplay = document.querySelector("#currentTeamNameDisplay");
-const teamChangeArea = document.querySelector("#teamChangeArea");
-const gameArea = document.querySelector("#gameArea");
+document.addEventListener("DOMContentLoaded", (event) => {
+    // References to HTML elements
+    const currentTeamNameDisplay = document.querySelector("#currentTeamNameDisplay");
+    const gameArea = document.querySelector("#gameArea");
+    const teamChangeArea = document.querySelector("#teamChangeArea");
+
+    // Erstelle ein neues Spiel
+    let game = new WordwormGame();
+
+    // Initialisiere das Spiel
+    initializeGame(game, currentTeamNameDisplay, gameArea, teamChangeArea);
+});
 
 // Definiere Spielklasse
 class WordwormGame {
@@ -40,9 +48,9 @@ class WordwormGame {
         console.log('sendMatchResultToServer() called');
         const url = 'http://127.0.0.1:3000/saveMatchResult';
         const data = {
-            teamName: 'Team 1',
-            foundWords: game.getWords(),
-            teamScore: game.getWords().length - 1
+            teamName: this.teamName,
+            foundWords:  this.getWords(),
+            teamScore: this.getWords().length - 1
         };
 
         console.log('sendMatchResultToServer() sends data:', JSON.stringify(data));
@@ -69,16 +77,11 @@ class WordwormGame {
     }
 }
 
-// Erstelle ein neues Spiel
-let game = new WordwormGame();
 
-// Initialisiere das Spiel
-initializeGame();
-
-function initializeGame() {
+function initializeGame(game, currentTeamNameDisplay, gameArea, teamChangeArea) {
     // Display the current team name and option to change it
-    displayCurrentTeamName();
-    displayTeamNameChangeOption();
+    displayCurrentTeamName(game, currentTeamNameDisplay);
+    displayTeamNameChangeOption(game, teamChangeArea);
 
     let emptyInputs = 0;  // Zähler für leere Eingaben
     const input = document.createElement('input');
@@ -98,9 +101,9 @@ function initializeGame() {
         }
         input.value = '';
         if (emptyInputs < 2) {
-            updateGameArea();
+            updateGameArea(game, gameArea);
         } else {
-            endGame();
+            endGame(game, gameArea);
         }
     };
 
@@ -119,15 +122,15 @@ function initializeGame() {
     });
 
     gameArea.append(input, button);
-    updateGameArea();
+    updateGameArea(game, gameArea);
 }
 
-function displayCurrentTeamName() {
+function displayCurrentTeamName(game, currentTeamNameDisplay) {
     // Update the displayed team name
     currentTeamNameDisplay.textContent = `Team: ${game.teamName}`;
 }
 
-function displayTeamNameChangeOption() {
+function displayTeamNameChangeOption(game, teamChangeArea) {
     // Clear the previous content
     teamChangeArea.innerHTML = '';
 
@@ -141,7 +144,7 @@ function displayTeamNameChangeOption() {
         if (newTeamName !== '') {
             game.changeTeamName(newTeamName);
             // Update the displayed team name
-            displayCurrentTeamName();
+            displayCurrentTeamName(game, currentTeamNameDisplay);
         }
     });
 
@@ -149,7 +152,7 @@ function displayTeamNameChangeOption() {
 }
 
 // Aktualisiere die Spielanzeige
-function updateGameArea() {
+function updateGameArea(game, gameArea) {
     const oldWordList = gameArea.querySelector('ul');
     if (oldWordList) {
         oldWordList.remove();
@@ -164,7 +167,7 @@ function updateGameArea() {
 }
 
 // Beende das Spiel und zeige die Punktzahl
-function endGame() {
+function endGame(game, gameArea) {
     gameArea.innerHTML = `<p>Spiel beendet. Du hast ${game.getWords().length - 1} Punkte erreicht!</p>`;
     game.sendMatchResultToServer();
 }
