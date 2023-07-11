@@ -1,11 +1,12 @@
 'use strict'; // Aktivieren Sie den strengen Modus
 
-// Name of this file: wordsworm.js
+// file: wordsworm.js
 
 // Definiere Spielklasse
 class WordwormGame {
     constructor() {
         this.words = ["Anfang"]; // Initialisiere das Wörter-Array mit dem Startwort
+        this.teamName = "Elfe Hannah";  // Initialize team name
     }
 
     // Prüfe, ob das Wort gültig ist
@@ -23,6 +24,10 @@ class WordwormGame {
     // Gib die Wörter zurück
     getWords() {
         return this.words;
+    }
+
+    changeTeamName(newName) {
+        this.teamName = newName;
     }
 
     // Add function sendMatchResultToServer()
@@ -44,18 +49,18 @@ class WordwormGame {
                 'Content-Type': 'application/json'
             }
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Match result sent to server:', data);
-        })
-        .catch(error => {
-            console.error('Error sending match result to server:', error);
-        });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Match result sent to server:', data);
+            })
+            .catch(error => {
+                console.error('Error sending match result to server:', error);
+            });
     }
 }
 
@@ -92,8 +97,37 @@ function initializeGame() {
         }
     });
 
+    // Display team name and option to change it
+    displayTeamName();
+
     gameArea.append(input, button);
     updateGameArea();
+}
+
+function displayTeamName() {
+    // Clear the previous content
+    teamNameArea.innerHTML = '';
+
+    // Display the current team name
+    const teamNameDisplay = document.createElement('p');
+    teamNameDisplay.textContent = `Teamname: ${game.teamName}`;
+    teamNameArea.append(teamNameDisplay);
+
+    // Add input and button to change team name
+    const teamNameInput = document.createElement('input');
+    const changeTeamNameButton = document.createElement('button');
+    changeTeamNameButton.textContent = 'Teamnamen ändern';
+
+    changeTeamNameButton.addEventListener('click', () => {
+        const newTeamName = teamNameInput.value;
+        if (newTeamName !== '') {
+            game.changeTeamName(newTeamName);
+            // Update the displayed team name
+            displayTeamName();
+        }
+    });
+
+    teamNameArea.append(teamNameInput, changeTeamNameButton);
 }
 
 // Aktualisiere die Spielanzeige
