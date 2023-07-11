@@ -24,41 +24,12 @@ const port = 3000;
 // Alles in 'public' wird direkt zugänglich sein.
 app.use(express.static('public'));
 
-<<<<<<< HEAD
 // Aktiviert CORS für alle Routen.
 app.use(cors());
 
 app.use(express.json()); // for parsing application/json
 
 let fileToDeliver = "index.html";
-=======
-// Aktiviert CORS nur für lokale Routen.
-app.use(cors({
-    // Erlaubt Anfragen nur von diesen Quelle
-    origin: function (origin, callback) {
-        console.log('CORS origin:', origin);
-         if (['http://127.0.0.1:3000', 'http://localhost:3000'].indexOf(origin) !== -1) {
-            callback(null, true)
-         } else {
-             callback(new Error('Nicht erlaubt durch CORS'))
-        }
-    }
-}));
-
-app.use(express.json()); // for parsing application/json
-
-// Definiert eine Route für die Startseite ('/').
-// Wenn der Benutzer die Website ohne spezifischen Pfad aufruft, senden wir 'index.html'.
-let fileToDeliver = "index.html";
-app.get('/', (req, res) => {
-    console.log('User called website without path, Deliver index.html');
-
-    // sendFile liefert die angegebene Datei an den Client. 
-    // __dirname ist das Verzeichnis, in dem das aktuelle Skript liegt.
-    res.sendFile(`${__dirname}/public/${fileToDeliver}`);
-});
-
->>>>>>> 1ed7c42303b2d0f40a976b7256fab3dd1efb8211
 let calledPath = '/one-player';
 app.get(calledPath, (req, res) => {
     console.log(`User called Website with path ${calledPath}. We deliver ${fileToDeliver}`);
