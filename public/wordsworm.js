@@ -74,12 +74,16 @@ const gameArea = document.querySelector("#gameArea");
 initializeGame();
 
 function initializeGame() {
+    // Display team name and option to change it
+    displayTeamName();
+
     let emptyInputs = 0;  // Zähler für leere Eingaben
     const input = document.createElement('input');
     const button = document.createElement('button');
     button.textContent = 'Wort hinzufügen';
 
-    button.addEventListener('click', () => {
+    // Function to handle word submission
+    const submitWord = () => {
         const word = input.value;
         if (word === '') {
             emptyInputs++;
@@ -95,10 +99,21 @@ function initializeGame() {
         } else {
             endGame();
         }
-    });
+    };
 
-    // Display team name and option to change it
-    displayTeamName();
+    // Event listener for button click
+    button.addEventListener('click', submitWord);
+
+    // Event listener for Enter key in input field
+    input.addEventListener('keyup', (event) => {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            submitWord();
+        }
+    });
 
     gameArea.append(input, button);
     updateGameArea();
