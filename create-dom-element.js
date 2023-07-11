@@ -34,4 +34,4 @@ const createDOMElement = ({
 
 
 
-export default DOMElementAnlegen;
+export default createDOMElement;
