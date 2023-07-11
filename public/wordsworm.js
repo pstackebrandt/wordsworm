@@ -5,7 +5,7 @@
 // References to HTML elements
 const currentTeamNameDisplay = document.querySelector("#currentTeamNameDisplay");
 const teamChangeArea = document.querySelector("#teamChangeArea");
-
+const gameArea = document.querySelector("#gameArea");
 
 // Definiere Spielklasse
 class WordwormGame {
@@ -71,9 +71,6 @@ class WordwormGame {
 
 // Erstelle ein neues Spiel
 let game = new WordwormGame();
-
-// Referenzen auf HTML-Elemente
-const gameArea = document.querySelector("#gameArea");
 
 // Initialisiere das Spiel
 initializeGame();
