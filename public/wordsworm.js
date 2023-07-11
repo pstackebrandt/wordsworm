@@ -77,7 +77,6 @@ class WordswormGame {
     }
 }
 
-
 function initializeGame(game, currentTeamNameDisplay, gameArea, teamChangeArea) {
     // Display the current team name and option to change it
     displayCurrentTeamName(game, currentTeamNameDisplay);
