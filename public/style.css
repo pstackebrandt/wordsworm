@@ -13,4 +13,10 @@
     border-radius: 4px;
 }
 
+#currentTeamNameDisplay, .card-title {
+    font-size: 1.2em; /* Ändere diesen Wert, um die Größe anzupassen */
+}
 
+input {
+    margin-right: 10px; /* Ändere diesen Wert, um die Größe der Lücke anzupassen */
+}

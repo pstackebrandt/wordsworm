@@ -143,7 +143,7 @@ function displayTeamNameChangeOption(game, teamChangeArea, currentTeamNameDispla
     // Add input and button to change team name
     const teamNameInput = document.createElement('input');
     const changeTeamNameButton = document.createElement('button');
-    changeTeamNameButton.textContent = 'Teamnamen ändern';
+    changeTeamNameButton.textContent = 'Teamname ändern';
 
     const changeTeamName = () => {
         const newTeamName = teamNameInput.value;
