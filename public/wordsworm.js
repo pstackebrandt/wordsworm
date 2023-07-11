@@ -49,7 +49,7 @@ class WordswormGame {
         const url = 'http://127.0.0.1:3000/saveMatchResult';
         const data = {
             teamName: this.teamName,
-            foundWords:  this.getWords(),
+            foundWords: this.getWords(),
             teamScore: this.getWords().length - 1
         };
 
@@ -77,17 +77,20 @@ class WordswormGame {
     }
 }
 
-function initializeGame(game, currentTeamNameDisplay, gameArea, teamChangeArea) {
-    // Display the current team name and option to change it
+// Initialisiert das Spiel und erstellt die Spieloberfläche
+const initializeGame = (game, currentTeamNameDisplay, gameArea, teamChangeArea) => {
+    // Anzeigen des aktuellen Teamnamens und Option zur Änderung
     displayCurrentTeamName(game, currentTeamNameDisplay);
     displayTeamNameChangeOption(game, teamChangeArea, currentTeamNameDisplay);
 
     let emptyInputs = 0;  // Zähler für leere Eingaben
+
+    // Erstellung des Eingabe- und Schaltflächenelements
     const input = document.createElement('input');
     const button = document.createElement('button');
     button.textContent = 'Wort hinzufügen';
 
-    // Function to handle word submission
+    // Funktion zur Behandlung der Wortübermittlung
     const submitWord = () => {
         const word = input.value;
         if (word === '') {
@@ -99,6 +102,8 @@ function initializeGame(game, currentTeamNameDisplay, gameArea, teamChangeArea) 
             }
         }
         input.value = '';
+
+        // Aktualisierung des Spielbereichs oder Beendigung des Spiels bei zu vielen leeren Eingaben
         if (emptyInputs < 2) {
             updateGameArea(game, gameArea);
         } else {
@@ -106,10 +111,10 @@ function initializeGame(game, currentTeamNameDisplay, gameArea, teamChangeArea) 
         }
     };
 
-    // Event listener for button click
+    // Eventlistener für Button-Klick
     button.addEventListener('click', submitWord);
 
-    // Event listener for Enter key in input field
+    // Eventlistener für Enter-Taste im Eingabefeld
     input.addEventListener('keyup', (event) => {
         if (event.key === 'Enter') {
             event.preventDefault();
@@ -117,7 +122,10 @@ function initializeGame(game, currentTeamNameDisplay, gameArea, teamChangeArea) 
         }
     });
 
-    gameArea.append(input, button);
+    // Hinzufügen der Eingabe und der Schaltfläche zur Eingabebereich der Webseite
+    document.querySelector("#wordInputArea").append(input, button);
+
+    // Aktualisieren der Wortliste beim Initialisieren
     updateGameArea(game, gameArea);
 }
 
@@ -157,19 +165,24 @@ function displayTeamNameChangeOption(game, teamChangeArea, currentTeamNameDispla
     teamChangeArea.append(teamNameInput, changeTeamNameButton);
 }
 
-// Aktualisiere die Spielanzeige
-function updateGameArea(game, gameArea) {
-    const oldWordList = gameArea.querySelector('ul');
+// Aktualisiert den Spielbereich mit der aktuellen Liste der Worte
+const updateGameArea = (game, gameArea) => {
+    // Entfernen der alten Wortliste, wenn sie existiert
+    const oldWordList = document.querySelector("#foundWordsList").querySelector('ul');
     if (oldWordList) {
         oldWordList.remove();
     }
+
+    // Erstellen einer neuen Wortliste aus den aktuellen Wörtern des Spiels
     const wordList = document.createElement('ul');
     game.getWords().forEach(word => {
         const listItem = document.createElement('li');
         listItem.textContent = word;
         wordList.append(listItem);
     });
-    gameArea.append(wordList);
+
+    // Hinzufügen der neuen Wortliste zur Webseite
+    document.querySelector("#foundWordsList").append(wordList);
 }
 
 // Beende das Spiel und zeige die Punktzahl
