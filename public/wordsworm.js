@@ -9,14 +9,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const teamChangeArea = document.querySelector("#teamChangeArea");
 
     // Erstelle ein neues Spiel
-    let game = new WordwormGame();
+    let game = new WordswormGame();
 
     // Initialisiere das Spiel
     initializeGame(game, currentTeamNameDisplay, gameArea, teamChangeArea);
 });
 
 // Definiere Spielklasse
-class WordwormGame {
+class WordswormGame {
     constructor() {
         this.words = ["Anfang"]; // Initialisiere das Wörter-Array mit dem Startwort
         this.teamName = "Elfe Hannah";  // Initialize team name
