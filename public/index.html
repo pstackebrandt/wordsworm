@@ -21,34 +21,31 @@
 
 <body>
     <div class="container py-4">
-        <!-- Game title -->
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <main id="mainArea" class="col-md-8">
+                <!-- Page title -->
                 <div class="text-center mb-4">
-                    <h1>Wörterwurm</h1>
-                    <p class="lead">Finde das nächste passende Wort und lasse Deinen Wurm wachsen!</p>
+                    <h1 id="pageTitle">Wörterwurm</h1>
+                    <p id="slogan" class="lead">Finde das nächste passende Wort und lasse Deinen Wurm wachsen!</p>
                 </div>
-                <!-- Current team name display and game area -->
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h3 id="currentTeamNameDisplay" class="card-title text-center"></h3>
-                        <!-- Area where the game is rendered -->
-                        <div id="gameArea">
-                            <!-- Area for word input -->
-                            <div id="wordInputArea" class="card mb-4">
-                                <div class="card-body">
-                                    <h2 class="card-title">Wort hinzufügen</h2>
-                                    <!-- The input field and button will be inserted here -->
-                                </div>
-                            </div>
-                            <!-- Area for displaying found words -->
-                            <div id="foundWordsList" class="card mb-4">
-                                <div class="card-body">
-                                    <h2 class="card-title">Gefundene Wörter</h2>
-                                    <div id="wordList" class="word-list">
-                                        <!-- The list of found words will be dynamically inserted here -->
-                                    </div>
-                                </div>
+                
+				<h3 id="currentTeamNameDisplay" class="text-center"></h3>
+
+				<!-- Area where the game is rendered -->
+                <div id="gameArea">
+                    <!-- Area for word input -->
+                    <div id="wordInputArea" class="card mb-4">
+                        <div class="card-body">
+                            <h2 class="card-title">Wort hinzufügen</h2>
+                            <!-- The input field and button will be inserted here -->
+                        </div>
+                    </div>
+                    <!-- Area for displaying found words -->
+                    <div id="foundWordsList" class="card mb-4">
+                        <div class="card-body">
+                            <h2 class="card-title">Gefundene Wörter</h2>
+                            <div id="wordList" class="word-list">
+                                <!-- The list of found words will be dynamically inserted here -->
                             </div>
                         </div>
                     </div>
@@ -62,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </main>
         </div>
     </div>
 </body>
