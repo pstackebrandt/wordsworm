@@ -96,10 +96,15 @@ const initializeGame = (game, teamNameDisplay, gameArea, teamChangeArea) => {
         const word = wordInput.value;
         if (word === '') {
             emptyInputs++;
+            setWordInputFeedback(`Du hast nichts eingegeben. Wenn du zweimal nacheinander nichts eingibst, beenden wird das Spiel. 😉`);
         } else {
             emptyInputs = 0;
             if (game.checkWord(word)) {
                 game.addWord(word);
+                setWordInputFeedback(`Das hast du gut gemacht! 🌞`);
+            } else {
+                setWordInputFeedback(`Das Wort <strong>${word}</strong> ist ungültig! 🌦️
+                 Das neue Wort muss mit ${getFirstLetter(word)} beginnen.`);
             }
         }
         wordInput.value = '';
@@ -123,11 +128,14 @@ const initializeGame = (game, teamNameDisplay, gameArea, teamChangeArea) => {
         }
     });
 
-    // Hinzufügen der Eingabe und der Schaltfläche zur Eingabebereich der Webseite
-    //document.querySelector("#wordInputArea").append(container);
+    setWordInputFeedback(''); // Hide feedback element
 
     // Aktualisieren der Wortliste beim Initialisieren
     updateGameArea(game, gameArea);
+}
+
+function getFirstLetter(word) {
+    return String.fromCodePoint(word.codePointAt(0));
 }
 
 function displayCurrentTeamName(game, teamNameDisplay) {
@@ -164,6 +172,12 @@ function displayTeamNameChangeOption(game, teamChangeArea, teamNameDisplay) {
     });
 
     teamChangeArea.append(teamNameInput, changeTeamNameButton);
+}
+// Zeigt eine Rückmeldung unter dem Eingabefeld an oder versteckt das Element, wenn der Inhalt leer ist
+const setWordInputFeedback = (content) => {
+    let feedbackElement = document.getElementById('wordInputFeedback');
+    feedbackElement.innerHTML = content;
+    feedbackElement.style.display = content.trim() === '' ? 'none' : 'block';
 }
 
 // Aktualisiert den Spielbereich mit der aktuellen Liste der Worte
