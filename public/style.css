@@ -13,6 +13,10 @@
     border-radius: 4px;
 }
 
+.last-word {
+  background-color: orange;
+}
+
 /* .card {
     border: none
 } */

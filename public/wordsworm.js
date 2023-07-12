@@ -112,12 +112,13 @@ const initializeGame = (game, teamNameDisplay, gameArea, teamChangeArea) => {
         // Aktualisierung des Spielbereichs oder Beendigung des Spiels bei zu vielen leeren Eingaben
         if (emptyInputs < 2) {
             updateGameArea(game, gameArea);
+            highlightLastWord();
         } else {
             endGame(game, gameArea);
         }
     };
 
-    // Eventlistener für Button-Klick
+    // Eventlistener für add word button
     addWordBtn.addEventListener('click', submitWord);
 
     // Eventlistener für Enter-Taste im Eingabefeld
@@ -128,10 +129,18 @@ const initializeGame = (game, teamNameDisplay, gameArea, teamChangeArea) => {
         }
     });
 
+    // Eventlistener für end game button
+    document.getElementById('endGameButton').addEventListener('click', () => {
+        endGame(game, gameArea);
+    });
+
     setWordInputFeedback(''); // Hide feedback element
 
     // Aktualisieren der Wortliste beim Initialisieren
     updateGameArea(game, gameArea);
+
+    // Hervorheben des letzten Wortes
+    highlightLastWord();
 }
 
 function getFirstLetter(word) {
@@ -197,6 +206,19 @@ const updateGameArea = (game, gameArea) => {
         wordItem.classList.add("word-item");
         wordList.append(wordItem);
     });
+}
+
+// Funktion zum Hervorheben des letzten Wortes
+const highlightLastWord = () => {
+    const wordList = document.querySelector("#wordList");
+    const wordItems = wordList.querySelectorAll(".word-item");
+
+    // Entferne die zuvor hinzugefügte Hervorhebungs-Klasse von allen Worten
+    wordItems.forEach(wordItem => wordItem.classList.remove("last-word"));
+
+    // Füge die Hervorhebungs-Klasse nur zum letzten Wort hinzu
+    const lastWordItem = wordItems[wordItems.length - 1];
+    lastWordItem.classList.add("last-word");
 }
 
 // Beende das Spiel und zeige die Punktzahl
