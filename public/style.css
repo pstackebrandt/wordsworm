@@ -13,9 +13,7 @@
     border-radius: 4px;
 }
 
-#currentTeamNameDisplay, .card-title {
-    font-size: 1.2em; /* Ändere diesen Wert, um die Größe anzupassen */
-}
+
 
 .input-button-container {
     display: flex;

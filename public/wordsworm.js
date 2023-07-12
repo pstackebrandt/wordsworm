@@ -4,7 +4,7 @@
 
 document.addEventListener("DOMContentLoaded", (event) => {
     // References to HTML elements
-    const currentTeamNameDisplay = document.querySelector("#currentTeamNameDisplay");
+    const teamNameDisplay = document.querySelector("#teamNameDisplay");
     const gameArea = document.querySelector("#gameArea");
     const teamChangeArea = document.querySelector("#teamChangeArea");
 
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     let game = new WordswormGame();
 
     // Initialisiere das Spiel
-    initializeGame(game, currentTeamNameDisplay, gameArea, teamChangeArea);
+    initializeGame(game, teamNameDisplay, gameArea, teamChangeArea);
 });
 
 // Definiere Spielklasse
@@ -80,10 +80,10 @@ class WordswormGame {
 }
 
 // Initialisiert das Spiel und erstellt die Spieloberfläche
-const initializeGame = (game, currentTeamNameDisplay, gameArea, teamChangeArea) => {
+const initializeGame = (game, teamNameDisplay, gameArea, teamChangeArea) => {
     // Anzeigen des aktuellen Teamnamens und Option zur Änderung
-    displayCurrentTeamName(game, currentTeamNameDisplay);
-    displayTeamNameChangeOption(game, teamChangeArea, currentTeamNameDisplay);
+    displayCurrentTeamName(game, teamNameDisplay);
+    displayTeamNameChangeOption(game, teamChangeArea, teamNameDisplay);
 
     let emptyInputs = 0;  // Zähler für leere Eingaben
 
@@ -130,12 +130,12 @@ const initializeGame = (game, currentTeamNameDisplay, gameArea, teamChangeArea) 
     updateGameArea(game, gameArea);
 }
 
-function displayCurrentTeamName(game, currentTeamNameDisplay) {
+function displayCurrentTeamName(game, teamNameDisplay) {
     // Update the displayed team name
-    currentTeamNameDisplay.textContent = `Team: ${game.teamName}`;
+    teamNameDisplay.textContent = `Team: ${game.teamName}`;
 }
 
-function displayTeamNameChangeOption(game, teamChangeArea, currentTeamNameDisplay) {
+function displayTeamNameChangeOption(game, teamChangeArea, teamNameDisplay) {
     // Clear the previous content
     teamChangeArea.innerHTML = '';
 
@@ -149,7 +149,7 @@ function displayTeamNameChangeOption(game, teamChangeArea, currentTeamNameDispla
         if (newTeamName !== '') {
             game.changeTeamName(newTeamName);
             // Update the displayed team name
-            displayCurrentTeamName(game, currentTeamNameDisplay);
+            displayCurrentTeamName(game, teamNameDisplay);
         }
     };
 
