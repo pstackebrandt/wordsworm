@@ -28,37 +28,43 @@
                     <h1 id="pageTitle">Wörterwurm</h1>
                     <p id="slogan" class="lead">Finde das nächste passende Wort und lasse Deinen Wurm wachsen!</p>
                 </div>
-                
-				<h3 id="currentTeamNameDisplay" class="text-center"></h3>
 
-				<!-- Area where the game is rendered -->
+                <div>
+                    <h3 id="currentTeamNameDisplay" class="text-center"></h3>
+                </div>
+
+                <!-- Area where the game is rendered -->
                 <div id="gameArea">
                     <!-- Area for word input -->
                     <div id="wordInputArea" class="card mb-4">
                         <div class="card-body">
                             <h2 class="card-title">Wort hinzufügen</h2>
-                            <!-- The input field and button will be inserted here -->
+                            <div class="input-group input-button-container">
+                                <input id="wordInput" type="text" class="form-control"
+                                    placeholder="Nächstes Wort eingeben" aria-label="Nächstes Wort eingeben"
+                                    aria-describedby="addWordButton">
+                                <button id="addWordButton" class="btn btn-primary" type="button">Hinzufügen</button>
+                            </div>
                         </div>
-                    </div>
-                    <!-- Area for displaying found words -->
-                    <div id="foundWordsList" class="card mb-4">
-                        <div class="card-body">
-                            <h2 class="card-title">Gefundene Wörter</h2>
-                            <div id="wordList" class="word-list">
-                                <!-- The list of found words will be dynamically inserted here -->
+                        <!-- Area for displaying found words -->
+                        <div id="foundWordsList" class="card mb-4">
+                            <div class="card-body">
+                                <h2 class="card-title">Gefundene Wörter</h2>
+                                <div id="wordList" class="word-list">
+                                    <!-- The list of found words will be dynamically inserted here -->
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Team name change area -->
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title">Teamname ändern</h2>
-                        <div id="teamChangeArea">
-                            <!-- Option to change team name will be inserted here -->
+                    <!-- Team name change area -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title">Teamname ändern</h2>
+                            <div id="teamChangeArea">
+                                <!-- Option to change team name will be inserted here -->
+                            </div>
                         </div>
                     </div>
-                </div>
             </main>
         </div>
     </div>

@@ -88,20 +88,12 @@ const initializeGame = (game, currentTeamNameDisplay, gameArea, teamChangeArea) 
     let emptyInputs = 0;  // Zähler für leere Eingaben
 
     // Erstellung des Eingabe- und Schaltflächenelements
-    const input = document.createElement('input');
-    const button = document.createElement('button');
-    button.textContent = 'Wort hinzufügen';
-
-    // Create a container
-    const container = document.createElement('div');
-    container.classList.add('input-button-container');
-
-    // Add input and button to the container
-    container.append(input, button);
+    const wordInput = document.getElementById('wordInput');
+    const addWordBtn = document.getElementById('addWordButton');
 
     // Funktion zur Behandlung der Wortübermittlung
     const submitWord = () => {
-        const word = input.value;
+        const word = wordInput.value;
         if (word === '') {
             emptyInputs++;
         } else {
@@ -110,7 +102,7 @@ const initializeGame = (game, currentTeamNameDisplay, gameArea, teamChangeArea) 
                 game.addWord(word);
             }
         }
-        input.value = '';
+        wordInput.value = '';
 
         // Aktualisierung des Spielbereichs oder Beendigung des Spiels bei zu vielen leeren Eingaben
         if (emptyInputs < 2) {
@@ -121,10 +113,10 @@ const initializeGame = (game, currentTeamNameDisplay, gameArea, teamChangeArea) 
     };
 
     // Eventlistener für Button-Klick
-    button.addEventListener('click', submitWord);
+    addWordBtn.addEventListener('click', submitWord);
 
     // Eventlistener für Enter-Taste im Eingabefeld
-    input.addEventListener('keyup', (event) => {
+    wordInput.addEventListener('keyup', (event) => {
         if (event.key === 'Enter') {
             event.preventDefault();
             submitWord();
@@ -132,7 +124,7 @@ const initializeGame = (game, currentTeamNameDisplay, gameArea, teamChangeArea) 
     });
 
     // Hinzufügen der Eingabe und der Schaltfläche zur Eingabebereich der Webseite
-    document.querySelector("#wordInputArea").append(container);
+    //document.querySelector("#wordInputArea").append(container);
 
     // Aktualisieren der Wortliste beim Initialisieren
     updateGameArea(game, gameArea);
