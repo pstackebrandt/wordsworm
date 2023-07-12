@@ -46,6 +46,16 @@ class WordswormGame {
         return this.words;
     }
 
+    // Gib die gefundenen Wörter zurück (ohne das Startwort)
+    getFoundWords() {
+        return this.words.slice(1); // Rückgabe der Worte ab dem Index 1 (ohne das Startwort)
+    }
+
+    getLastFoundWord() {
+        // return last word of this.words
+        return this.words[this.words.length - 1];
+    }
+
     changeTeamName(newName) {
         this.teamName = newName;
     }
@@ -57,7 +67,8 @@ class WordswormGame {
         const data = {
             teamName: this.teamName,
             foundWords: this.getWords(),
-            teamScore: this.getWords().length - 1
+            teamScore: (this.getWords().length - 1) * 100 // Punkte = Anzahl der gefundenen Wörter * 100
+            // todo: Punkteberechnung zentral ablegen. Es gibt mehrere Stellen, an denen die Punkte berechnet werden.
         };
 
         console.log('sendMatchResultToServer() sends data:', JSON.stringify(data));
@@ -98,18 +109,21 @@ const initializeGame = (game, teamNameDisplay, gameArea, teamChangeArea) => {
 
     // Funktion zur Behandlung der Wortübermittlung
     const submitWord = () => {
-        const word = wordInput.value;
-        if (word === '') {
+        const newWord = wordInput.value;
+        if (newWord === '') {
             emptyInputs++;
             setWordInputFeedback(`Du hast nichts eingegeben. Wenn du zweimal nacheinander nichts eingibst, beenden wird das Spiel. 😉`);
         } else {
             emptyInputs = 0;
-            if (game.checkWord(word)) {
-                game.addWord(word);
+            
+            if (game.checkWord(newWord)) {
+                game.addWord(newWord);
                 setWordInputFeedback(`Das hast du gut gemacht! 🌞`);
             } else {
-                setWordInputFeedback(`Das Wort <strong>${word}</strong> ist ungültig! 🌦️
-                 Das neue Wort muss mit ${getFirstLetter(word)} beginnen.`);
+                const lastFoundWord = game.getLastFoundWord();
+                const lastLetter = getLastLetter(lastFoundWord)
+                setWordInputFeedback(`Das Wort <strong>${newWord}</strong> ist ungültig! 🌦️
+                 Das neue Wort muss mit ${lastLetter} beginnen weil das letzte gefunde Wort ${lastFoundWord} ist.`);
             }
         }
         wordInput.value = '';
@@ -149,8 +163,8 @@ const initializeGame = (game, teamNameDisplay, gameArea, teamChangeArea) => {
     highlightLastWord();
 }
 
-function getFirstLetter(word) {
-    return String.fromCodePoint(word.codePointAt(0));
+function getLastLetter(word) {
+    return String.fromCodePoint(word.codePointAt(word.length - 1));
 }
 
 function displayCurrentTeamName(game, teamNameDisplay) {
