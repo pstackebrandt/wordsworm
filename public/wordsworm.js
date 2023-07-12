@@ -11,6 +11,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
     // Erstelle ein neues Spiel
     let game = new WordswormGame();
 
+    const savedTeamName = localStorage.getItem("teamName");
+    if (savedTeamName) {
+        game.changeTeamName(savedTeamName);
+    }
+
     // Initialisiere das Spiel
     initializeGame(game, teamNameDisplay, gameArea, teamChangeArea);
 });
@@ -132,6 +137,7 @@ const initializeGame = (game, teamNameDisplay, gameArea, teamChangeArea) => {
     // Eventlistener für end game button
     document.getElementById('endGameButton').addEventListener('click', () => {
         endGame(game, gameArea);
+        window.location.href = 'game-end.html'; // Weiterleitung zur game-end.html-Seite
     });
 
     setWordInputFeedback(''); // Hide feedback element
@@ -221,8 +227,16 @@ const highlightLastWord = () => {
     lastWordItem.classList.add("last-word");
 }
 
-// Beende das Spiel und zeige die Punktzahl
+// Beende das Spiel, zeige die Punktzahl, speichere Daten für game-end.html und sende die Daten an den Server
 function endGame(game, gameArea) {
-    gameArea.innerHTML = `<p>Spiel beendet. Du hast ${game.getWords().length - 1} Punkte erreicht!</p>`;
+    const foundWordsCount = game.getWords().length - 2; // Abzüglich des Startwortes
+    const teamScore = foundWordsCount > 0 ? foundWordsCount * 100 : 0;
+
+    gameArea.innerHTML = `<p>Spiel beendet. Du hast ${foundWordsCount} Punkte erreicht!</p>`;
     game.sendMatchResultToServer();
+
+    // Speichern des Teamnamens im localStorage
+    localStorage.setItem("teamName", game.teamName);
+    localStorage.setItem("wordCount", foundWordsCount);
+    localStorage.setItem("teamScore", teamScore);
 }
