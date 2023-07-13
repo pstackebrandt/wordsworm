@@ -1,4 +1,4 @@
-// file name: high-score.js (high-score page)
+// file name: high-scores.js (high-scores page)
 
 // Get the team name from localStorage
 // and display it on the page

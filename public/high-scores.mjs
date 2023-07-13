@@ -1,4 +1,4 @@
-// file name: high-score.mjs
+// file name: high-scores.mjs
 
 // Import the fetchViewResults function from the module.
 import { fetchViewResults } from './fetch-match-results-module.mjs';

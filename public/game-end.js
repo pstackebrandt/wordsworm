@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         cleanLocalStore();
 
         // Weiterleitung zur High score-Seite
-        window.location.href = "high-score.html";
+        window.location.href = "high-scores.html";
     });
 });
 
