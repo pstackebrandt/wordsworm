@@ -16,7 +16,7 @@ const fetchMatchResultsWithHighestScores = async () => {
   try {
     // Fetch the first 10 results from the view 'by_score_and_name' 
     // in the design document 'teams', in ascending order.
-    const response = await db.view('teams', 'by_score_and_name', { limit: 10, descending: false });
+    const response = await db.view('teams', 'by_score_and_name', { limit: 10, descending: true });
 
     // Return the fetched results.
     return response.rows;
