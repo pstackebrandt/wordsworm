@@ -1,12 +1,10 @@
 // file name: high-scores.mjs
 
-import { fetchMatchResultsWithHighestScores } from './fetch-match-results-module.mjs';
-
 const highScoresModule = (() => {
-    async function getHighScores() {
+    // data contains an array of objects with match results:
+    async function getHighScores(data) {
         try {
-            // Fetch data from the view.
-            const data = await fetchMatchResultsWithHighestScores();
+            console.log('High scores:', data);
 
             // Get the 'score-list' element in the document.
             let scoreList = document.getElementById('score-list');
@@ -14,11 +12,7 @@ const highScoresModule = (() => {
             // Make sure the score list is empty before appending new scores.
             scoreList.innerHTML = '';
 
-            // Sort the data by teamScore in descending order.
-            data.sort((a, b) => b.value.teamScore - a.value.teamScore);
-
-            // Limit to the top 10 scores.
-            data.slice(0, 10).forEach(score => {
+            data.forEach(score => {
                 // Create a new score row for each high score.
                 let scoreRow = document.createElement('div');
                 scoreRow.classList.add('score-row');
@@ -40,7 +34,14 @@ const highScoresModule = (() => {
                 foundWordsRow.classList.add('row');
                 let foundWordsCol = document.createElement('div');
                 foundWordsCol.classList.add('col');
-                foundWordsCol.textContent = score.value.foundWords.join(', ');
+
+                // Check if score.value.foundWords is defined and it's an array before joining
+                if (score.value.foundWords && Array.isArray(score.value.foundWords)) {
+                    foundWordsCol.textContent = score.value.foundWords.join(', ');
+                } else {
+                    // You can provide a fallback value here if foundWords is not defined or not an array
+                    foundWordsCol.textContent = 'Keine Wörter gefunden';
+                }
 
                 // Append both rows to the score row.
                 scoreRow.appendChild(teamAndScoreRow);
