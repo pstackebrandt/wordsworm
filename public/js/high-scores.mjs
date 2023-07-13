@@ -60,4 +60,5 @@ const highScoresModule = (() => {
     }
 })();
 
+
 export default highScoresModule;
