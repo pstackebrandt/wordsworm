@@ -1,4 +1,4 @@
-// file name: game-end.js
+// file name: game-end.js (game end page)
 
 // Get the team name, word count and team score from localStorage
 // and display them on the page
