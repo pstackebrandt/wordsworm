@@ -2,11 +2,12 @@
 
 import { fetchMatchResultsWithHighestScores } from './fetch-match-results-module.mjs';
 
+
 const highScoresModule = (() => {
     async function getHighScores() {
         try {
             // Fetch data from the view.
-            const data = await fetchMatchResultsWithHighestScores();
+            const data = await fetchVifetchMatchResultsWithHighestScoresewResults();
 
             // Get the 'score-list' element in the document.
             let scoreList = document.getElementById('score-list');
