@@ -18,21 +18,13 @@ const fetchMatchResultsWithHighestScores = async () => {
     // in the design document 'teams', in ascending order.
     const response = await db.view('teams', 'by_score_and_name', { limit: 10, descending: false });
 
-    // Log the fetched results.
-    console.log("Fetched results from view:", response.rows);
+    // Return the fetched results.
+    return response.rows;
   } catch (err) {
     // If there was an error fetching the results, log it.
     console.error("Error fetching results from view:", err);
   }
 };
-
-// async function fetchMatchResultsWithHighestScores() {
-//   const response = await fetch("http://127.0.0.1:3000/nano");
-//   if (!response.ok) {
-//       throw new Error(`HTTP error! status: ${response.status}`);
-//   }
-//   return await response.json();
-// }
 
 // Export the function as a module
 export { fetchMatchResultsWithHighestScores as fetchMatchResultsWithHighestScores };

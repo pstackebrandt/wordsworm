@@ -16,6 +16,10 @@ import cors from 'cors';
 import { createMatchResult } from './matchResultUtils.js';
 import { saveMatchResultToDB } from './save-match-result-to-couch-db.js';
 
+// Importieren der Funktion zum Abrufen von Match-Ergebnissen.
+import { fetchMatchResultsWithHighestScores } from './fetch-match-results-module.mjs';
+
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -59,6 +63,21 @@ app.post('/saveMatchResult', (req, res) => {
         });
 });
 
+// Route für das Abrufen der Highscores
+app.get('/highscores', async (req, res) => {
+    try {
+        // Abrufen der Highscores
+        const highScores = await fetchMatchResultsWithHighestScores();
+
+        // Senden der Highscores als Antwort
+        res.json(highScores);
+    } catch (err) {
+        console.error("Fehler beim Abrufen der Highscores:", err);
+
+        // Senden einer Fehlermeldung als Antwort
+        res.status(500).json({ message: 'Fehler beim Abrufen der Highscores.' });
+    }
+});
 
 // Startet den Server und lässt ihn auf dem definierten Port lauschen.
 app.listen(port, hostIP, () => {
