@@ -3,6 +3,7 @@
 // Import the fetchViewResults function from the module.
 import { fetchViewResults } from './fetch-match-results-module.mjs';
 
+
 const highScoresModule = (() => {
     async function getHighScores() {
         try {
