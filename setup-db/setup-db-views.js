@@ -2,7 +2,6 @@
 
 // Import the nano library, a minimalistic CouchDB driver for Node.js.
 import { default as Nano } from 'nano';
-//import nano from 'nano';
 
 // Credentials für die Anmeldung in Couch
 const username = 'admin';
@@ -10,9 +9,7 @@ const password = 'asy';
 const dbName = 'wordsworm';
 
 // Create a connection to your CouchDB instance.
-// Replace 'username' and 'password' with your actual CouchDB username and password.
-// Replace 'localhost:5984' with the actual address and port of your CouchDB instance.
- const nano = Nano(`http://${username}:${password}@127.0.0.1:5984`);
+const nano = Nano(`http://${username}:${password}@127.0.0.1:5984`);
 
 // Select the 'wordsworm' database in your CouchDB instance.
 const db = nano.db.use(dbName);
@@ -22,8 +19,8 @@ const designDoc = {
   "_id": "_design/teams",
   "views": {
     "by_score_and_name": {
-      // Map function for the view: emit teamScore and teamName as key, other needed fields as value.
-      "map": "function (doc) { emit([doc.teamScore, doc.teamName], {teamName: doc.teamName, teamScore: doc.teamScore, foundWords: doc.foundWords, _id: doc._id, _rev: doc._rev}) }"
+      // Map function for the view: emit teamScore (as a padded string) and teamName as key, other needed fields as value.
+      "map": "function (doc) { var teamScoreStr = ('0000' + doc.teamScore).slice(-4); emit([teamScoreStr, doc.teamName], {teamName: doc.teamName, teamScore: doc.teamScore, foundWords: doc.foundWords, _id: doc._id, _rev: doc._rev}) }"
     }
     // You can add more views here.
   }
