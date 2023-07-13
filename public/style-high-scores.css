@@ -1,20 +1,10 @@
-/* style.css */
-
-.word-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+.card {
+    max-width: 70%; /* This will make every card 30% narrower than before */
+    margin: 0 auto; /* This will center the card if it is not already */
 }
 
-.word-item {
-    padding: 6px 12px;
-    background-color: #f8f9fa;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-}
-
-.last-word {
-  background-color: orange;
+.card.last {
+    max-width: 60%; /* This will make the last card 60% narrower than before */
 }
 
 /* .card {
@@ -49,4 +39,3 @@
   .table td {
     padding: 0.5rem;
   }
-  
