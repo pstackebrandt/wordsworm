@@ -4,9 +4,9 @@ export const createMatchResult = (reqBody) => {
     return {
         
       // _id wird automatisch generiert
-      teamName: reqBody.team,
-      foundWords: reqBody.words,
-      teamScore: reqBody.score
+      teamName: reqBody.teamName,
+      foundWords: reqBody.foundWords,
+      teamScore: reqBody.teamScore
     };
   };
   

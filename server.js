@@ -42,8 +42,6 @@ app.get(calledPath, (req, res) => {
 
 // Match-Ergebnisse speichern
 app.post('/saveMatchResult', (req, res) => {
-    console.log('Empfangene Match-Ergebnisse:', req.body);
-
     // Erstellen des MatchResult-Objekts mit der createMatchResult Funktion
     let matchResult = createMatchResult(req.body);
 

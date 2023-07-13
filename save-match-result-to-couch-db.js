@@ -12,9 +12,10 @@ const db = nano(`http://${username}:${password}@127.0.0.1:5984`).db.use(dbName);
 
 // Die Funktion, um MatchResult in die Datenbank zu speichern
 export const saveMatchResultToDB = (matchResult) => {
+
   return db.insert(matchResult)
     .then(response => {
-      console.log('Insertion response:', response);
+      console.log('Match result DB insertion response:', response);
       return response;
     })
     .catch(err => {
