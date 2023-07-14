@@ -1,84 +1,73 @@
 // file name: high-scores.mjs
 
 const highScoresModule = (() => {
-    // data contains an array of objects with match results:
-    async function getHighScores(data) {
+    // This function handles the creation and display of high scores.
+    const getHighScores = async (data) => {
         try {
             console.log('High scores:', data);
 
-            // Get the 'score-list' element in the document.
+            // Retrieves the 'score-list' element in the document.
             let scoreList = document.getElementById('score-list');
 
-            // Make sure the score list is empty before appending new scores.
+            // Clear the score list before appending new scores.
             scoreList.innerHTML = '';
 
-            // Create the table element
+            // Creates the table element.
             let table = document.createElement('table');
             table.classList.add('table', 'table-bordered');
 
-            // Create the table head
+            // Creates the table head and the header row.
             let thead = document.createElement('thead');
+            let headRow = document.createElement('tr');
             thead.classList.add('table-primary');
 
-            // Create the table head row
-            let headRow = document.createElement('tr');
-
-            // Create the team header cell
+            // Creates header cells and assigns them text content.
             let teamHeader = document.createElement('th');
-            teamHeader.textContent = 'Team';
-
-            // Create the score header cell
             let scoreHeader = document.createElement('th');
+            teamHeader.textContent = 'Team';
             scoreHeader.textContent = 'Punkte';
 
-            // Append the header cells to the header row
-            headRow.appendChild(teamHeader);
-            headRow.appendChild(scoreHeader);
+            // Appends the header cells to the header row.
+            headRow.append(teamHeader, scoreHeader);
 
-            // Append the header row to the table head
+            // Appends the header row to the table head.
             thead.appendChild(headRow);
 
-            // Append the table head to the table
+            // Appends the table head to the table.
             table.appendChild(thead);
 
-            // Create the table body
+            // Creates the table body.
             let tbody = document.createElement('tbody');
 
+            // For each high score, create a new row and cells.
             data.forEach(score => {
-                // Create a new row for each high score.
                 let row = document.createElement('tr');
-
-                // Create the team cell
                 let teamCell = document.createElement('td');
-                teamCell.textContent = score.value.teamName;
-
-                // Create the score cell
                 let scoreCell = document.createElement('td');
+                teamCell.textContent = score.value.teamName;
                 scoreCell.textContent = score.value.teamScore;
 
-                // Append the cells to the row
-                row.appendChild(teamCell);
-                row.appendChild(scoreCell);
+                // Appends the cells to the row.
+                row.append(teamCell, scoreCell);
 
-                // Append the row to the table body
+                // Appends the row to the table body.
                 tbody.appendChild(row);
             });
 
-            // Append the table body to the table
+            // Appends the table body to the table.
             table.appendChild(tbody);
 
-            // Append the table to the score list
+            // Appends the table to the score list.
             scoreList.appendChild(table);
         } catch (error) {
             console.error('Failed to get high scores:', error);
         }
     }
 
-    // Publicly accessible functions
+    // Expose the getHighScores function to other modules.
     return {
         getHighScores,
     }
 })();
-
 
 export default highScoresModule;
