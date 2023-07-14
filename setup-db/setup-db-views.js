@@ -3,7 +3,7 @@
 // Import the nano library, a minimalistic CouchDB driver for Node.js.
 import { default as Nano } from 'nano';
 
-// Credentials für die Anmeldung in Couch
+// Credentials for logging into Couch
 const username = 'admin';
 const password = 'asy';
 const dbName = 'wordsworm';
@@ -20,14 +20,14 @@ const designDoc = {
   "views": {
     "by_score_and_name": {
       // Map function for the view: emit teamScore (as a padded string) and teamName as key, other needed fields as value.
-      "map": "function (doc) { var teamScoreStr = ('0000' + doc.teamScore).slice(-4); emit([teamScoreStr, doc.teamName], {teamName: doc.teamName, teamScore: doc.teamScore, foundWords: doc.foundWords, _id: doc._id, _rev: doc._rev}) }"
+      "map": `(doc) => { var teamScoreStr = ('0000' + doc.teamScore).slice(-4); emit([teamScoreStr, doc.teamName], {teamName: doc.teamName, teamScore: doc.teamScore, foundWords: doc.foundWords, _id: doc._id, _rev: doc._rev}) }`
     }
     // You can add more views here.
   }
 };
 
 // Asynchronous function to create or update the view.
-async function createOrUpdateView() {
+const createOrUpdateView = async () => {
   try {
     // Try to get the existing design document.
     const existing = await db.get('_design/teams');
