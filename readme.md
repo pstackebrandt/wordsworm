@@ -51,6 +51,11 @@ To start the server and access the client application, follow the steps below:
 
    **Note:** Ensure that the server is running before accessing the client. Otherwise, the client application will not be able to establish a connection.
 
+
+### Datbase
+Create a local Couch DB wordsworm with admin and password asy.
+Install a view by using setup-db-views.js. Run script with node.js.
+
 ## Issues and Feedback
 
 If you encounter any issues or have any feedback, please [open an issue](https://github.com/pstackebrandt/wordsworm/issues) on the GitHub repository.
