@@ -23,8 +23,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
 // Definiere Spielklasse
 class WordswormGame {
     constructor() {
-        //this.words = ["Anfang"]; // Initialisiere das Wörter-Array mit dem Startwort
-        this.words = ["Anfang", "Gans", "Sau", "Ulme", "Emil", "Lupe", "Esel", "Lust"]; // dummy values for testing
+        this.words = ["Anfang"]; // Initialisiere das Wörter-Array mit dem Startwort
+        //this.words = ["Anfang", "Gans", "Sau", "Ulme", "Emil", "Lupe", "Esel", "Lust"]; // dummy values for testing
 
         this.teamName = "Elfe Hannah";  // Initialize team name
     }
