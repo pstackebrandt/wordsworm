@@ -1,45 +1,46 @@
-// file name: game-end.js (game end page)
+// file name: game-end.js
 
-// Get the team name, word count and team score from localStorage
-// and display them on the page
-// Remove unnessary data from localStorage on start of new game with index.html
-document.addEventListener("DOMContentLoaded", (event) => {
+// This script is responsible for displaying team name, word count and team score at the end of the game.
+// It also handles the event listeners for the "Start New Game" and "Show High Scores" buttons.
+
+// Event Listener for when the DOM content is loaded.
+document.addEventListener("DOMContentLoaded", () => {
+    // Querying the necessary elements from the DOM.
     const teamNameDisplay = document.querySelector("#teamNameDisplay");
     const wordCountDisplay = document.querySelector("#wordCountDisplay");
     const teamScoreDisplay = document.querySelector("#teamScoreDisplay");
     const startNewGameButton = document.querySelector("#startNewGameButton");
     const showHighScoresButton = document.querySelector("#showHighScoresButton");
 
+    // Retrieving saved data from the localStorage.
     const savedTeamName = localStorage.getItem("teamName");
     const savedWordCount = localStorage.getItem("wordCount");
     const savedTeamScore = localStorage.getItem("teamScore");
 
+    // If the saved data exists, display it on the page.
     if (savedTeamName && savedWordCount && savedTeamScore) {
         teamNameDisplay.textContent = savedTeamName;
         wordCountDisplay.textContent = savedWordCount;
         teamScoreDisplay.textContent = savedTeamScore;
     }
 
+    // Adding click event listeners for the buttons and cleaning the localStorage before redirection.
     startNewGameButton.addEventListener("click", () => {
         cleanLocalStore();
-
-        // Weiterleitung zur Spielseite
+        // Redirecting to the game page.
         window.location.href = "index.html";
     });
 
     showHighScoresButton.addEventListener("click", () => {
         cleanLocalStore();
-
-        // Weiterleitung zur High score-Seite
+        // Redirecting to the high scores page.
         window.location.href = "high-scores.html";
     });
 });
 
+// Function to clean the localStorage by removing unnecessary data.
 const cleanLocalStore = () => {
-    // Zurücksetzen der gespeicherten Daten im localStorage
-
-    // "teamName" wird nicht zurückgesetzt, da es für die Game page und die 
-    //  High score-Seite benötigt wird.
+    // "teamName" is not removed as it is required for the game page and high scores page.
     localStorage.removeItem("wordCount");
     localStorage.removeItem("teamScore");
-}
+};
