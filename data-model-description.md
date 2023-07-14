@@ -3,6 +3,8 @@
 - Das Modell ist noch nicht auf eine Umsetzung mit einem bestimmte Datenbanktyp abgestimmt.
 - Es enthält diverse optionale Elemente die vorerst noch nicht benötigt werden.
 
+- Achtung: Aktuell ist eine wesentliche einfache Variante umgesetzt.
+
 ## Partie
 - `Partienummer`: Eindeutige Ganzzahl
 - `Spielergebnis`: Verweis auf das entsprechende Spielergebnis
