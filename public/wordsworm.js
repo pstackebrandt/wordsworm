@@ -163,16 +163,16 @@ const initializeGame = (game, teamNameDisplay, gameArea, teamChangeArea) => {
     highlightLastWord();
 }
 
-function getLastLetter(word) {
+const getLastLetter = (word) => {
     return String.fromCodePoint(word.codePointAt(word.length - 1));
 }
 
-function displayCurrentTeamName(game, teamNameDisplay) {
+const displayCurrentTeamName = (game, teamNameDisplay) => {
     // Update the displayed team name
     teamNameDisplay.textContent = `Team: ${game.teamName}`;
 }
 
-function displayTeamNameChangeOption(game, teamChangeArea, teamNameDisplay) {
+const displayTeamNameChangeOption = (game, teamChangeArea, teamNameDisplay) => {
     // Clear the previous content
     teamChangeArea.innerHTML = '';
 
@@ -208,6 +208,7 @@ function displayTeamNameChangeOption(game, teamChangeArea, teamNameDisplay) {
 
     teamChangeArea.append(teamNameInput, changeTeamNameButton);
 }
+
 // Zeigt eine Rückmeldung unter dem Eingabefeld an oder versteckt das Element, wenn der Inhalt leer ist
 const setWordInputFeedback = (content) => {
     let feedbackElement = document.getElementById('wordInputFeedback');
@@ -241,16 +242,17 @@ const highlightLastWord = () => {
     lastWordItem.classList.add("last-word");
 }
 
-// Beende das Spiel, zeige die Punktzahl, speichere Daten für game-end.html und sende die Daten an den Server
-function endGame(game, gameArea) {
-    const foundWordsCount = game.getWords().length - 2; // Abzüglich des Startwortes
+// End the game, display the score, save data for game-end.html and send the data to the server
+const endGame = (game, gameArea) => {
+    const foundWordsCount = game.getWords().length - 2; // Minus the start word
     const teamScore = foundWordsCount > 0 ? foundWordsCount * 100 : 0;
 
-    gameArea.innerHTML = `<p>Spiel beendet. Du hast ${foundWordsCount} Punkte erreicht!</p>`;
+    gameArea.innerHTML = `<p>Game ended. You have scored ${foundWordsCount} points!</p>`;
     game.sendMatchResultToServer();
 
-    // Speichern des Teamnamens im localStorage
+    // Saving the team name in localStorage
     localStorage.setItem("teamName", game.teamName);
     localStorage.setItem("wordCount", foundWordsCount);
     localStorage.setItem("teamScore", teamScore);
 }
+
